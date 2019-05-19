@@ -22,9 +22,13 @@ module.exports = {
 		});
 	},
 	delete: (req, res) => {
-		Expense.deleteMany({ evtId: req.params.id }).then(() => {
-			Event.delete({ _id: req.params.id }).then((evt) => {
-				res.json(evt);
+		Event.findOne({ _id: req.params.id }).then((evt) => {
+			evt.expenses.forEach((exp) => {
+				Expense.deleteOne({ _id: exp }).then(() => {
+					Event.deleteOne({ _id: req.params.id }).then((deleted) => {
+						res.json(deleted);
+					});
+				});
 			});
 		});
 	}
