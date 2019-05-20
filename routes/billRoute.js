@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router({ mergeParams: true });
-const controller = require('../controllers/evtControl.js');
+
+const router = express.Router();
+const controller = require('../controllers/billControl.js');
 
 router.get('/', controller.index);
 router.get('/:id', controller.findById);

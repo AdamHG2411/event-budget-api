@@ -1,0 +1,40 @@
+[
+	{
+		"username": "adam.h.grider@gmail.com",
+		"password": "P@ssw0rd",
+		"income": 60000,
+		"bills": [
+			{
+				"name": "Rent",
+				"amount": 1800,
+				"freq": 12,
+				"category": "Home"
+			},
+			{
+				"name": "Netflix",
+				"amount": 12.99,
+				"freq": 12,
+				"category": "Entertainment"
+			}
+		],
+		"events": [
+			{
+				"name": "4th of July in Oklahoma",
+				"dates": {
+					"start": "7/3/19",
+					"end": "7/7/19"
+				},
+				"expenses": [
+					{
+						"name": "flight",
+						"cost": 500,
+						"category": "Travel",
+						"url": "https://www.southwest.com/",
+						"purchased": false,
+						"essential": true
+					}
+				]
+			}
+		]
+	}
+]
