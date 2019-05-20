@@ -15,7 +15,7 @@ app.use(
 app.use(parser.json());
 
 app.use('/api/events/', evtRouter);
-app.use('/api/expenses', expRouter);
+app.use('/api/expenses/', expRouter);
 
 app.listen(3001, () => {
 	console.log('planning a much-needed vacation on 3001');
