@@ -28,7 +28,7 @@ module.exports = {
 	delete: (req, res) => {
 		Event.findOne({ _id: req.params.eventId }).then((event) => {
 			Expense.deleteOne({ _id: req.params.expenseId }).then((expense) => {
-				let newExpenses = event.expenses.filter((expense) => expense !== req.params.expenseId);
+				let newExpenses = event.expenses.filter((expense) => expense != req.params.expenseId);
 				event.expenses = newExpenses;
 				event.save();
 				res.json(expense);
