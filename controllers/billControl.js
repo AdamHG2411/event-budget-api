@@ -28,7 +28,7 @@ module.exports = {
 	delete: (req, res) => {
 		User.findOne({ _id: req.params.userId }).then((user) => {
 			Bill.deleteOne({ _id: req.params.billId }).then((bill) => {
-				let newBills = user.bills.filter((bill) => bill !== req.params.billId);
+				let newBills = user.bills.filter((bill) => bill != req.params.billId);
 				user.bills = newBills;
 				user.save();
 				res.json(bill);
