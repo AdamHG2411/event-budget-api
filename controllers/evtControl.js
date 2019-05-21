@@ -1,34 +1,37 @@
-let { User } = require('../db/models.js');
+const { User, Event } = require('../db/models.js');
 
 module.exports = {
 	index: (req, res) => {
-		User.find({}).then((evts) => {
-			res.json(evts);
-		});
+		Event.find({}).then((events) => res.json(events));
 	},
 	findById: (req, res) => {
-		User.find({ _id: req.params.id }).then((evt) => {
-			res.json(evt);
+		Event.findOne({ _id: req.params.eventId }).then((event) => {
+			res.json(event);
 		});
 	},
 	create: (req, res) => {
-		User.create(req.body).then((evt) => {
-			res.json(evt);
+		User.findOne({ _id: req.params.userId }).then((user) => {
+			Event.create(req.body).then((newEvent) => {
+				user.events.push(newEvent._id);
+				user.save();
+				Event.updateOne({ _id: newEvent._id }, { userId: req.params.userId }).then((event) => {
+					res.json(event);
+				});
+			});
 		});
 	},
 	update: (req, res) => {
-		User.update({ _id: req.params.id }, req.body).then((evt) => {
-			res.json(evt);
+		Event.updateOne({ _id: req.params.eventId }, req.body).then((event) => {
+			res.json(event);
 		});
 	},
 	delete: (req, res) => {
-		User.findOne({ _id: req.params.id }).then((evt) => {
-			evt.expenses.forEach((exp) => {
-				Expense.deleteOne({ _id: exp }).then(() => {
-					User.deleteOne({ _id: req.params.id }).then((deleted) => {
-						res.json(deleted);
-					});
-				});
+		User.findOne({ _id: req.params.userId }).then((user) => {
+			Event.deleteOne({ _id: req.params.eventId }).then((event) => {
+				let newEvents = user.events.filter((event) => event !== req.params.eventId);
+				user.events = newEvents;
+				user.save();
+				res.json(event);
 			});
 		});
 	}
