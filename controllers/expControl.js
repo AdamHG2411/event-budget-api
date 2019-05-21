@@ -12,6 +12,8 @@ module.exports = {
 	create: (req, res) => {
 		Event.findOne({ _id: req.params.eventId }).then((event) => {
 			Expense.create(req.body).then((newExpense) => {
+				event.expenses.push(newExpense._id);
+				event.save();
 				Expense.updateOne({ _id: newExpense._id }, { eventId: req.params.eventId }).then((expense) => {
 					res.json(expense);
 				});
