@@ -28,6 +28,8 @@ app.get('/api/', (req, res) => {
 	res.redirect('/api/users/');
 });
 
-app.listen(3001, () => {
-	console.log('planning a much-needed vacation on 3001');
+app.set('port', process.env.PORT || 3001);
+
+app.listen(app.get('port'), () => {
+	console.log(`planning a much-needed vacation on ${app.get('port')}`);
 });

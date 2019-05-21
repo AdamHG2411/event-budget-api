@@ -1,26 +1,27 @@
 {
-  "name": "event-budget-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
-    "express": "^4.17.0",
-    "mongoose": "^5.5.9"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AdamHG2411/event-budget-api.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AdamHG2411/event-budget-api/issues"
-  },
-  "homepage": "https://github.com/AdamHG2411/event-budget-api#readme"
+	"name": "event-budget-api",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"cors": "^2.8.5",
+		"express": "^4.17.0",
+		"mongoose": "^5.5.9"
+	},
+	"devDependencies": {},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AdamHG2411/event-budget-api.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/AdamHG2411/event-budget-api/issues"
+	},
+	"homepage": "https://github.com/AdamHG2411/event-budget-api#readme"
 }
