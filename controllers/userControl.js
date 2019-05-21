@@ -1,13 +1,13 @@
-let User = require('../db/models/User.js');
+let { User } = require('../db/models.js');
 
-module.userorts = {
+module.exports = {
 	index: (req, res) => {
 		User.find({}).then((users) => {
 			res.json(users);
 		});
 	},
 	findById: (req, res) => {
-		User.find({ _id: req.params.id }).then((user) => {
+		User.findOne({ _id: req.params.userId }).then((user) => {
 			res.json(user);
 		});
 	},
@@ -17,12 +17,12 @@ module.userorts = {
 		});
 	},
 	update: (req, res) => {
-		User.update({ _id: req.params.id }, req.body).then((user) => {
+		User.updateOne({ _id: req.params.userId }, req.body).then((user) => {
 			res.json(user);
 		});
 	},
 	delete: (req, res) => {
-		User.delete({ _id: req.params.id }).then((user) => {
+		User.deleteOne({ _id: req.params.userId }).then((user) => {
 			res.json(user);
 		});
 	}

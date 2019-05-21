@@ -3,9 +3,9 @@ const router = express.Router({ mergeParams: true });
 const controller = require('../controllers/evtControl.js');
 
 router.get('/', controller.index);
-router.get('/:id', controller.findById);
+router.get('/:eventId', controller.findById);
 router.post('/', controller.create);
-router.put('/:id', controller.update);
-router.delete('/:id', controller.delete);
+router.put('/:eventId', controller.update);
+router.delete('/:eventId', controller.delete);
 
 module.exports = router;
