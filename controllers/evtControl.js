@@ -28,10 +28,12 @@ module.exports = {
 	delete: (req, res) => {
 		User.findOne({ _id: req.params.userId }).then((user) => {
 			Event.deleteOne({ _id: req.params.eventId }).then((event) => {
-				let newEvents = user.events.filter((event) => event != req.params.eventId);
-				user.events = newEvents;
-				user.save();
-				res.json(event);
+				Expense.deleteMany({ eventId: req.params.eventId }).then((exp) => {
+					let newEvents = user.events.filter((event) => event != req.params.eventId);
+					user.events = newEvents;
+					user.save();
+					res.json(event);
+				});
 			});
 		});
 	}
