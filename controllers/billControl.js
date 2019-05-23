@@ -2,7 +2,7 @@ const { User, Bill } = require('../db/models.js');
 
 module.exports = {
 	index: (req, res) => {
-		Bill.find({}).then((bills) => res.json(bills));
+		Bill.find({ userId: req.params.userId }).then((bills) => res.json(bills));
 	},
 	findById: (req, res) => {
 		Bill.findOne({ _id: req.params.billId }).then((bill) => {

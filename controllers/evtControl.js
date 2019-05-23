@@ -2,7 +2,7 @@ const { User, Event } = require('../db/models.js');
 
 module.exports = {
 	index: (req, res) => {
-		Event.find({}).then((events) => res.json(events));
+		Event.find({ userId: req.params.userId }).then((events) => res.json(events));
 	},
 	findById: (req, res) => {
 		Event.findOne({ _id: req.params.eventId }).then((event) => {
