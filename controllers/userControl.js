@@ -22,8 +22,21 @@ module.exports = {
 		});
 	},
 	delete: (req, res) => {
-		User.deleteOne({ _id: req.params.userId }).then((user) => {
-			res.json(user);
+		Event.find({ userId: req.params.userId }).then((events) => {
+			events.forEach((event) => {
+				Expense.deleteMany({ eventId: event._id }).then((expenses) => {
+					console.log(expenses);
+					Event.deleteMany({ userId: req.params.userId }).then((events) => {
+						console.log(events);
+						Bill.deleteMany({ userId: req.params.userId }).then((bills) => {
+							console.log(bills);
+							User.deleteOne({ _id: req.params.userId }).then((user) => {
+								console.log(user);
+							});
+						});
+					});
+				});
+			});
 		});
 	}
 };
