@@ -11,11 +11,13 @@ module.exports = {
 	},
 	create: (req, res) => {
 		User.findOne({ _id: req.params.userId }).then((user) => {
-			Bill.create(req.body).then((newBill) => {
-				user.bills.push(newBill._id);
-				user.save();
-				Bill.updateOne({ _id: newBill._id }, { userId: req.params.userId }).then((bill) => {
-					res.json(bill);
+			Bill.create(req.body).then((bills) => {
+				bills.forEach((bill) => {
+					user.bills.push(bill._id);
+					user.save();
+					Bill.updateOne({ _id: bill._id }, { userId: req.params.userId }).then((newBill) => {
+						res.json(newBill);
+					});
 				});
 			});
 		});
