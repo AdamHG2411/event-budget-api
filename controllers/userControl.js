@@ -25,24 +25,27 @@ module.exports = {
 		User.findOne({ _id: req.params.userId }).then((user) => {
 			if (user.events) {
 				Event.find({ userId: req.params.userId }).then((events) => {
-					events.forEach((event) => {
-						Expense.deleteMany({ eventId: event._id }).then((expenses) => {
-							console.log(expenses);
-							Event.deleteMany({ userId: req.params.userId }).then((events) => {
-								console.log(events);
-								if (user.bills) {
-									Bill.deleteMany({ userId: req.params.userId }).then((bills) => {
-										console.log(bills);
-									});
-								}
-								User.deleteOne({ _id: req.params.userId }).then((user) => {
-									console.log(user);
-								});
+					events.forEach((thisEvent) => {
+						console.log(thisEvent);
+						if (thisEvent.expenses) {
+							Expense.deleteMany({ eventId: event._id }).then((delExp) => {
+								console.log(delExp);
 							});
+						}
+						Event.deleteOne({ _id: event._id }).then((delEvent) => {
+							console.log(delEvent);
 						});
 					});
 				});
 			}
+			if (user.bills) {
+				Bill.deleteMany({ userId: req.params.userId }).then((delBills) => {
+					console.log(delBills);
+				});
+			}
+			User.deleteOne({ _id: req.params.userId }).then((delUser) => {
+				res.json(delUser);
+			});
 		});
 	}
 };
