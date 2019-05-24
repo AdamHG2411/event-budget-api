@@ -20,6 +20,7 @@ module.exports = {
 					});
 				});
 			});
+			res.json(newExpenses);
 		});
 	},
 	update: (req, res) => {
