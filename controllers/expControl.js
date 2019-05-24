@@ -15,9 +15,8 @@ module.exports = {
 				newExpenses.forEach((newExpense) => {
 					event.expenses.push(newExpense._id);
 					event.save();
-					Expense.updateOne({ _id: newExpense._id }, { eventId: req.params.eventId }).then((expense) => {
-						console.log(expense);
-					});
+					newExpense.eventId = event._id;
+					newExpense.save();
 				});
 			});
 			res.json(newExpenses);
