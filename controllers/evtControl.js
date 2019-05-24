@@ -15,7 +15,7 @@ module.exports = {
 				user.events.push(newEvent._id);
 				user.save();
 				Event.updateOne({ _id: newEvent._id }, { userId: req.params.userId }).then((event) => {
-					res.json(event);
+					res.json(newEvent);
 				});
 			});
 		});
