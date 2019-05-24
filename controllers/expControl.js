@@ -10,16 +10,16 @@ module.exports = {
 		});
 	},
 	create: (req, res) => {
-		Event.findOne({ _id: req.params.eventId }).then((event) => {
+		Event.findOne({ _id: req.params.eventId }).then((foundEvent) => {
 			Expense.create(req.body).then((newExpenses) => {
 				newExpenses.forEach((newExpense) => {
-					event.expenses.push(newExpense._id);
-					event.save();
-					newExpense.eventId = event._id;
+					foundEvent.expenses.push(newExpense._id);
+					foundEvent.save();
+					newExpense.eventId = foundEvent._id;
 					newExpense.save();
 				});
+				res.json(newExpenses);
 			});
-			res.json(newExpenses);
 		});
 	},
 	update: (req, res) => {
